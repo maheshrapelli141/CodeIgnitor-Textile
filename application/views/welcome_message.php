@@ -1,89 +1,68 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+?>
+<div class="custom-container">
+	<div class="slideshow-container">
 
-	<style type="text/css">
+		<div class="mySlides fade">
+			<img src="./assets/img/slide1.jpg" style="width:100%;height:350px;" class="slider-img">
+			<div class="text">Caption Text</div>
+			</div>
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
+			<div class="mySlides fade">
+			<img src="./assets/img/slide2.jpeg" style="width:100%;height:350px;" class="slider-img">
+			<div class="text">Caption Two</div>
+			</div>
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
+			<div class="mySlides fade">
+			<img src="./assets/img/slide3.jpg" style="width:100%;height:350px;" class="slider-img">
+			<div class="text">Caption Three</div>
+		</div>
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+	<div style="text-align:center;" class="dots">
+		<span class="dot"></span> 
+		<span class="dot"></span> 
+		<span class="dot"></span> 
+	</div>
 </div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 cell-padding">
+			<h2 align="center">Rahul Textile</h2>
+			<p style="text-align:justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis ipsum elementum scelerisque laoreet. Nam hendrerit, tortor a dapibus blandit, metus arcu aliquet arcu, vitae commodo justo odio ut dui. Aliquam eleifend, mauris vel vulputate egestas, metus nisi efficitur ante, at sodales ipsum magna at sem. Duis ut condimentum diam. Morbi at accumsan mi, sit amet maximus turpis. In ac feugiat elit, at mollis nisi. Curabitur consequat lectus felis, vitae iaculis ex semper id. Quisque finibus consectetur malesuada. Aliquam id lobortis velit, aliquam consequat nunc. Duis sit amet erat et massa rutrum sodales. Nulla id suscipit massa. </p>
+		</div>
+		<div class="col-sm-4 cell-padding">
+			<img src="./assets/img/side-image.jpeg" style="height:auto;width:100%;">
+		</div>
+	</div>
+</div>
+<script>
+var slideIndex = 0;
+showSlides();
 
-</body>
-</html>
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+}
+</script>
