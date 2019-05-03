@@ -84,29 +84,17 @@ class Products extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function add($name = NULL,$image = NULL,$description = NULL,$price = NULL){
+    public function add($name = NULL,$description = NULL,$price = NULL){
        
         $data['title'] = "Rahul Textiles - Products";
-
-        $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 100;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
-        $this->load->library('upload', $config);
-
 
         $this->form_validation->set_rules('name','Name',array('required'));
         $this->form_validation->set_rules('description','Description',array('required'));
         $this->form_validation->set_rules('price','Price',array('required'));
-        $this->form_validation->set_rules('image','Image',array('required'));
 
         $name = $this->input->post('name');
         $description = $this->input->post('description');
-        $image = $this->input->post('image');
         $price = $this->input->post('price');
-
-        $imageName = './uploads/'.basename($image);
 
         $this->load->view('header',$data);
         $flag= "";
@@ -116,8 +104,7 @@ class Products extends CI_Controller {
         }
         else
         {
-            if($this->upload->do_upload($this->input->post('image'))){
-                if($this->products_model->add_product($name,$imageName,$description,$price))
+                if($this->products_model->add_product($name,$description,$price))
                 {
                     $flag = "success";
                 }
@@ -125,14 +112,10 @@ class Products extends CI_Controller {
                 {
                     $flag = "Failed to add data in database";
                 }
-            }
-            else {
-                $flag = "Failed to upload image";
-            }
         }
-        if($flag != "")
+        if($flag == "success")
         {
-            $this->load->view('welcomeadmin');
+            $this->load->view('productimage');
         } 
         else
         {

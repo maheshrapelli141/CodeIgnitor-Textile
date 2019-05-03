@@ -14,16 +14,15 @@ class Products_model extends CI_Model {
     }
 
     //pending to check this function
-    public function add_product($name = NULL,$image = NULL,$description = NULL,$price = NULL){
-        if($name != NULL && $image != NULL && $description != NULL && $price != NULL){
+    public function add_product($name = NULL,$description = NULL,$price = NULL){
+        if($name != NULL && $description != NULL && $price != NULL){
             $data = array(
                 'name' => $name,
-                'image'=> $image,
                 'description'=> $description,
                 'price' => $price
             );
             try {
-                if($this->db->set($data)->get_compiled_insert('textile_admin'))
+                if($this->db->insert('textile_products',$data))
                     return TRUE;
                 else
                     return FALSE;

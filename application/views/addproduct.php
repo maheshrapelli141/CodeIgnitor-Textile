@@ -2,13 +2,13 @@
     <div class="form-box">
 
     <?php 
-    if(isset($_POST['username'])){
+    if(isset($_POST['name'])){
         echo '<div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         '.validation_errors().'
       </div>';
     }
-    if(isset($flag)){
+    if(isset($flag) && $flag!=""){
         echo '<div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         '.$flag.'
@@ -24,9 +24,7 @@
     <input type="number" name="price" class="form-control" value="<?php echo set_value('price'); ?>" required><br>
     <label for="description">Description :</label>
     <textarea name="description" class="form-control" value="<?php echo set_value('description'); ?>" required></textarea><br>
-    <label for="image">Image :</label>
-    <input type="file" name="image" class="form-control" value="<?php echo set_value('image'); ?>" required><br>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary">Next</button>
 </form>    
 </div>
 </div>
