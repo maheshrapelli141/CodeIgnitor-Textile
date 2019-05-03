@@ -4,7 +4,7 @@
     <div class="row">
     <?php foreach($products as $product): ?>
     <div class="product-card col-sm-3">
-        <?php $url = "/index.php/products/product/".$product['id']; ?>
+        <?php $url = "/index.php/products/product/".$product['product_id']; ?>
     <a href="<?php echo base_url($url); ?>">
         <div class="card-inner">
             <img src="<?php echo base_url($product['image']); ?>" class="product-image">

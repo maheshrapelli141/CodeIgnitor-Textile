@@ -5,4 +5,10 @@ $('input').focus(function(){
 $('input').focusout(function(){
     $('.form-box').css({"box-shadow":"0px 0px 0px #000000","transition":".3s"});
 });
+$('textarea').focus(function(){
+    $('.form-box').css({"box-shadow":"0px 0px 10px #000000","transition":".3s"});
+});
+$('textarea').focusout(function(){
+    $('.form-box').css({"box-shadow":"0px 0px 0px #000000","transition":".3s"});
+});
 })

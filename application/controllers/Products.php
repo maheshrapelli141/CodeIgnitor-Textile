@@ -57,9 +57,9 @@ class Products extends CI_Controller {
 		
     }
     
-    public function product($id = NULL){
+    public function product($product_id = NULL){
 
-        $data['product'] = $this->products_model->get_product($id);
+        $data['product'] = $this->products_model->get_product($product_id);
         $data['title'] = "Rahul Textiles - ".$data['product']['name'];
 
         try{
@@ -84,7 +84,20 @@ class Products extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function add($name = NULL,$description = NULL,$price = NULL){
+    public function addproduct(){
+        $data['title'] = "Rahul Textiles - Add Product";
+
+        $this->load->view('header',$data);
+        if($this->session->has_userdata('adminusername')){
+            $this->load->view('addproduct');
+        }
+        else {
+            redirect(base_url('/index.php/admin'));
+        }
+        $this->load->view('footer');
+    }
+
+    public function add(){
        
         $data['title'] = "Rahul Textiles - Products";
 
@@ -95,6 +108,7 @@ class Products extends CI_Controller {
         $name = $this->input->post('name');
         $description = $this->input->post('description');
         $price = $this->input->post('price');
+        $product_id = substr($name, 0, 3).'-'.date('His').'-'.date('dMY');
 
         $this->load->view('header',$data);
         $flag= "";
@@ -104,7 +118,7 @@ class Products extends CI_Controller {
         }
         else
         {
-                if($this->products_model->add_product($name,$description,$price))
+                if($this->products_model->add_product($product_id,$name,$description,$price))
                 {
                     $flag = "success";
                 }
@@ -115,12 +129,57 @@ class Products extends CI_Controller {
         }
         if($flag == "success")
         {
-            $this->load->view('productimage');
+//            $data['product_id'] = $product_id;
+//            $this->load->view('productimage',$data);
+            $uri = "/index.php/products/addimage/".$product_id;
+            redirect($uri);
         } 
         else
         {
             $this->load->view('addproduct',$flag);
         }
         $this->load->view('footer');
+	}
+
+	public function addimage($product_id = NULL){
+        $data['title'] = "Rahul Textiles - Products";
+
+            if($this->input->post('product_id')!=NULL) {
+                $product_id = $this->input->post('product_id');
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['max_size'] = 100;
+                $config['max_width'] = 1024;
+                $config['max_height'] = 768;
+
+                $this->load->library('upload', $config);
+                $this->form_validation->set_rules('userfile', 'Image', array('required'));
+
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $data['error'] = $this->upload->display_errors();
+                } else {
+                    $imageData = $this->upload->data();
+                    $imageName = $imageData['orig_name'];
+                    if ($this->products_model->update_product_image($imageName, $product_id)) {
+                        redirect(base_url('index.php/admin/dashboard'));
+                    } else {
+                        $data['error'] = 'Failed to update database';
+                    }
+                }
+            }
+
+
+        $this->load->view('header',$data);
+	    if($product_id != NULL){
+            $data['product'] = $this->products_model->get_product($product_id);
+            $this->load->view('productimage', $data);
         }
+	    else {
+            $data['heading'] = "Product not selected";
+            $data['description'] = "Data is not retrived from database";
+            $this->load->view('empty_view',$data);
+        }
+        $this->load->view('footer');
+    }
 }

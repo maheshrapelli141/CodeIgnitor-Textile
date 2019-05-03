@@ -35,5 +35,12 @@
         <a class="nav-link" href="<?php echo base_url('/index.php/contact'); ?>">Contact</a>
       </li>
     </ul>
+      <?php if(isset($_SESSION['adminusername'])){ ?>
+      <ul class="navbar-nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('/index.php/admin/logout'); ?>">Logout</a>
+        </li>
+      </ul>
+      <?php } ?>
   </div>
 </nav>

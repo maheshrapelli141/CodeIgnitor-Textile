@@ -1,5 +1,6 @@
-<div class="container form-container">
-    <div class="form-box">
+<div class="container form-container"><br>
+    <h2>Add Product : </h2><hr>
+    <div class="form-box" style="top: 50%">
 
     <?php 
     if(isset($_POST['name'])){
@@ -17,7 +18,7 @@
      ?>
     <?php
     $formURL = base_url('index.php/products/add');
-    echo form_open_multipart($formURL); ?>
+    echo form_open($formURL); ?>
     <label for="username">Name :</label>
     <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>" required>
     <label for="password">Price :</label>
