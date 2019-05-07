@@ -2,6 +2,14 @@
 
 class Admin_model extends CI_Model {
 
+    var $datetime;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->datetime = date("Y-m-d H:i:s");
+    }
+
     public function login_check($username = NULL,$password = NULL){
         $query = $this->db->get('textile_admin');
         foreach($query->result() as $row){
@@ -18,7 +26,8 @@ class Admin_model extends CI_Model {
         }
         else {
             $data = array(
-                'username' => $username
+                'username' => $username,
+                'updated_date' => $this->datetime
             );
 
             $this->db->where('id', 1);
@@ -46,7 +55,8 @@ class Admin_model extends CI_Model {
         }
         else {
             $data = array(
-                'password' => $password
+                'password' => $password,
+                'updated_date' => $this->datetime
             );
 
             $this->db->where('id', 1);

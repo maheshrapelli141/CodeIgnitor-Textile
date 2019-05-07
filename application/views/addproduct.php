@@ -1,6 +1,6 @@
 <div class="container form-container"><br>
     <h2>Add Product : </h2><hr>
-    <div class="form-box" style="top: 50%">
+    <div class="form-box" style="top: 55%">
 
     <?php 
     if(isset($_POST['name'])){

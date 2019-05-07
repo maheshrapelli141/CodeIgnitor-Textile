@@ -28,7 +28,10 @@
             ?>
         <tr>
             <td><?php echo $i; ?></td>
-            <td><img src="<?php echo base_url($product['image']); ?>" height="64px" width="64px"></td>
+            <td>
+                <img src="<?php echo base_url($product['image']); ?>" height="64px" width="64px">
+                <img src="<?php echo base_url($product['sec_image']); ?>" height="64px" width="64px">
+            </td>
             <td><?php echo $product['name']; ?></td>
             <td>
                 <a href="<?php echo base_url("/index.php/products/updateproduct/".$product['product_id']); ?>" onclick="return confirm('Are you sure to edit');">
