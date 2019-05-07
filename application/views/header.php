@@ -8,8 +8,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/style.css'); ?>" >
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/bootstrap.css'); ?>" >
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/fontawesome.css'); ?>" >
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/solid.css'); ?>" >
     <script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/fontawesome.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/solid.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/main.js') ?>"></script>
     <script src="main.js"></script>
 </head>
@@ -37,10 +41,24 @@
     </ul>
       <?php if(isset($_SESSION['adminusername'])){ ?>
       <ul class="navbar-nav nav-right">
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('/index.php/admin/logout'); ?>">Logout</a>
-        </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('/index.php/admin/dashboard'); ?>">Dashboard</a>
+          </li>
+          <li class="nav-item edit-profile">
+                  <a class="nav-link" href='javascript:void();'><?php echo $_SESSION['adminusername'];?> <i class="fas fa-caret-down"></i></a>
+              <ul class="dropdown-data" type="none">
+                  <li><a class="nav-link" href="<?php echo base_url('/index.php/admin/changeusername'); ?>">Change Username</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url('/index.php/admin/changepassword'); ?>">Change Password</a></li>
+                  <li><a class="nav-link" href="<?php echo base_url('/index.php/admin/logout'); ?>">Logout</a></li>
+              </ul>
+          </li>
       </ul>
       <?php } ?>
   </div>
 </nav>
+<style>
+
+</style>
+<script>
+
+</script>

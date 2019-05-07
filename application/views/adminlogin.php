@@ -1,13 +1,19 @@
 <div class="container form-container">
     <div class="form-box">
 
-    <?php 
-    if(isset($_POST['username'])){
+    <?php if(isset($error) && $error!=""){
+        echo '<div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        '.$error.'
+      </div>';
+    }
+    else if(isset($_POST['username'])){
         echo '<div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         '.validation_errors().'
       </div>';
     }
+    else {}
      ?>
     <?php
     $formURL = base_url('index.php/admin/login');

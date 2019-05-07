@@ -182,4 +182,94 @@ class Products extends CI_Controller {
         }
         $this->load->view('footer');
     }
+
+    public function updateimage($product_id = NULL){
+        $data['title'] = "Rahul Textiles - Products";
+
+        if($this->input->post('product_id')!=NULL) {
+            $product_id = $this->input->post('product_id');
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'jpeg|jpg|png';
+            $config['max_size'] = 100;
+            $config['max_width'] = 1024;
+            $config['max_height'] = 768;
+
+            $this->load->library('upload', $config);
+            $this->form_validation->set_rules('userfile', 'Image', array('required'));
+
+
+            if (!$this->upload->do_upload('userfile')) {
+                $data['error'] = $this->upload->display_errors();
+            } else {
+                $imageData = $this->upload->data();
+                $imageName = $imageData['orig_name'];
+                if ($this->products_model->update_product_image($imageName, $product_id)) {
+                    $this->session->set_flashdata('product_image_message','Updation success');
+                    redirect(base_url('index.php/products/updateproduct/'.$product_id));
+                } else {
+                    $data['error'] = 'Failed to update database';
+                }
+            }
+        }
+
+
+        $this->load->view('header',$data);
+        if($product_id != NULL){
+            $data['product'] = $this->products_model->get_product($product_id);
+            $this->load->view('updateproduct', $data);
+        }
+        else {
+            $data['heading'] = "Product not selected";
+            $data['description'] = "Data is not retrived from database";
+            $this->load->view('empty_view',$data);
+        }
+        $this->load->view('footer');
+    }
+
+    public function updateproduct($product_id = NULL){
+	    if($this->session->has_userdata('adminusername')) {
+            $data['title'] = 'Update Product';
+            $data['product'] = $this->products_model->get_product($product_id);
+
+            if($this->input->post('product_id')!=NULL) {
+
+                $product_id = $this->input->post('product_id');
+                $name = $this->input->post('name');
+                $price = $this->input->post('price');
+                $description = $this->input->post('description');
+                if($this->products_model->update_product_details($product_id,$name,$price,$description)){
+                    $this->session->set_flashdata('product_details_message','Updation success');
+                    redirect(base_url('index.php/products/updateproduct/'.$product_id));
+                }
+                else {
+                    $data['error'] = 'Failed to update database';
+                }
+            }
+
+
+            $this->load->view('header', $data);
+            $this->load->view('updateproduct', $data);
+            $this->load->view('footer', $data);
+        }
+	    else {
+	        redirect(base_url('/index.php/admin/'));
+        }
+    }
+
+    public function deleteproduct($product_id = NULL) {
+	    if($product_id === NULL){
+	        $this->session->set_flashdata('delete_message','Invalid Product details');
+            redirect(base_url('index.php/admin/dashboard'));
+        }
+	    else {
+	        if($this->products_model->delete_product($product_id)){
+                $this->session->set_flashdata('delete_message','Product deleted successfully');
+                redirect(base_url('index.php/admin/dashboard'));
+            }
+	        else {
+                $this->session->set_flashdata('delete_message','Product not deleted from database');
+                redirect(base_url('index.php/admin/dashboard'));
+            }
+        }
+    }
 }

@@ -8,6 +8,12 @@
         echo '<h3>No products uploaded yet!</h3>';
     }
     else {
+        if($this->session->flashdata('delete_message')!="" OR $this->session->flashdata('delete_message')!=NULL){
+            echo '<div class="alert alert-dismissible alert-primary">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        '.$this->session->flashdata('delete_message').'
+      </div>';
+        }
     ?>
     <table class="table table-bordered">
         <thead>
@@ -25,10 +31,10 @@
             <td><img src="<?php echo base_url($product['image']); ?>" height="64px" width="64px"></td>
             <td><?php echo $product['name']; ?></td>
             <td>
-                <a href="<?php echo base_url("/index.php/admin/updateproduct/".$product['product_id']); ?>" onclick="return confirm('Are you sure to edit');">
+                <a href="<?php echo base_url("/index.php/products/updateproduct/".$product['product_id']); ?>" onclick="return confirm('Are you sure to edit');">
                     <span class="badge badge-warning">Edit</span>
                 </a> /
-                <a href="<?php echo base_url("/index.php/admin/deleteproduct/".$product['product_id']); ?>" onclick="return confirm('Are you sure to delete');">
+                <a href="<?php echo base_url("/index.php/products/deleteproduct/".$product['product_id']); ?>" onclick="return confirm('Are you sure to delete');">
                     <span class="badge badge-danger">Delete</span>
                 </a>
             </td>

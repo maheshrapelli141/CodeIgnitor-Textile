@@ -58,6 +58,54 @@ class Products_model extends CI_Model {
             }
         }
     }
+
+    public function update_product_details($product_id = NULL,$name = NULL,$price = NULL,$description = NULL){
+        if($product_id === NULL OR $name === NULL OR $price === NULL OR $description === NULL)
+        {
+            return FALSE;
+        }
+        else
+        {
+            try {
+                $data = array(
+                    'product_id' => $product_id,
+                    'name' => $name,
+                    'price' => $price,
+                    'description' => $description,
+                );
+                $this->db->where('product_id', $product_id);
+                if($this->db->update('textile_products',$data))
+                    return TRUE;
+                else
+                    return FALSE;
+            }
+            catch(Exception $e){
+                return FALSE;
+            }
+        }
+    }
+
+    public function delete_product($product_id = NULL){
+        if($product_id === NULL){
+            return FALSE;
+        }
+        else {
+            try{
+                $this->db->where('product_id',$product_id);
+                if($this->db->delete('textile_products'))
+                {
+                    return TRUE;
+                }
+                else {
+                    return FALSE;
+                }
+            }
+            catch (Exception $exception){
+                log_message($exception);
+                return FALSE;
+            }
+        }
+    }
 }   
 
 ?>

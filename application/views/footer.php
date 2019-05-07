@@ -1,6 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  
-</nav>
-
+<div class="footer">
+    &copy; Rahul Textiles 2019
+</div>
 </body>
 </html>

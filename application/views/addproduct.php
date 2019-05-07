@@ -21,7 +21,7 @@
     echo form_open($formURL); ?>
     <label for="username">Name :</label>
     <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>" required>
-    <label for="password">Price :</label>
+    <label for="price">Price :</label>
     <input type="number" name="price" class="form-control" value="<?php echo set_value('price'); ?>" required><br>
     <label for="description">Description :</label>
     <textarea name="description" class="form-control" value="<?php echo set_value('description'); ?>" required></textarea><br>
