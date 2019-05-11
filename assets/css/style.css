@@ -181,3 +181,12 @@ padding: 12px;
 }
 
 
+.wrapper {
+  padding: 60px 0px;
+}
+.breadcrumb{
+  display: block;
+}
+.breadcrumb-item{
+  display: inline;
+}

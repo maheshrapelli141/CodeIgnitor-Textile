@@ -21,9 +21,23 @@ class Welcome extends CI_Controller {
 		
 	public function index()
 	{
-		$data['title'] = "Rahul Textiles";
+		$data['title'] = "Rohit Textiles";
 		$this->load->view('header',$data);
 		$this->load->view('welcome_message');
 		$this->load->view('footer');
 	}
+
+	public function contact(){
+        $data['title'] = "Rohit Textiles - Contact";
+        $this->load->view('header',$data);
+        $this->load->view('contact');
+        $this->load->view('footer');
+    }
+
+    public function about(){
+        $data['title'] = "Rohit Textiles - About";
+        $this->load->view('header',$data);
+        $this->load->view('about');
+        $this->load->view('footer');
+    }
 }
