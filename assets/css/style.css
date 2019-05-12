@@ -76,21 +76,46 @@
 }
 .side-nav-btn {
   position: fixed;
-  padding: 15px;
   bottom: 30px;
   left:30px;
   color : #444 !important;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
-  border: 1px solid #000000;
-  box-shadow: 0px 0px 5px #ffffff;
+  box-shadow: 0px 0px 2px #ffffff;
   border-radius: 5px;
-  z-index: 99999;
+  z-index: 9999;
+  background-color: #ffffff;
 }
 @media only screen and (max-width: 640px) {
   .side-navbar{
     width: 100%;
   }
+}
+
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #3498db;
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .mySlides {display: none}

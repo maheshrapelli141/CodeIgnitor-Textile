@@ -89,6 +89,7 @@ class Products extends CI_Controller {
 
         $this->load->view('header',$data);
         if($this->session->has_userdata('adminusername')){
+            $this->load->view('sidenavbar');
             $this->load->view('addproduct');
         }
         else {
@@ -111,6 +112,7 @@ class Products extends CI_Controller {
             $product_id = substr($name, 0, 3) . '-' . date('His') . '-' . date('dMY');
 
             $this->load->view('header', $data);
+            $this->load->view('sidenavbar');
             $flag = "";
             if ($this->form_validation->run() === FALSE) {
                 $this->load->view('addproduct');
@@ -191,6 +193,7 @@ class Products extends CI_Controller {
 
 
             $this->load->view('header', $data);
+            $this->load->view('sidenavbar');
             if ($product_id != NULL) {
                 $data['product'] = $this->products_model->get_product($product_id);
                 $this->load->view('productimage', $data);
@@ -264,6 +267,7 @@ class Products extends CI_Controller {
 
 
             $this->load->view('header', $data);
+            $this->load->view('sidenavbar');
             if ($product_id != NULL) {
                 $data['product'] = $this->products_model->get_product($product_id);
                 $this->load->view('updateproduct', $data);
@@ -386,6 +390,7 @@ class Products extends CI_Controller {
 
 
             $this->load->view('header', $data);
+            $this->load->view('sidenavbar');
             $this->load->view('updateproduct', $data);
             $this->load->view('footer', $data);
         }
@@ -398,19 +403,45 @@ class Products extends CI_Controller {
         if($this->session->has_userdata('adminusername')) {
             if ($product_id === NULL) {
                 $this->session->set_flashdata('delete_message', 'Invalid Product details');
-                redirect(base_url('index.php/admin/dashboard'));
+                redirect(base_url('index.php/admin/adminproductsview'));
             } else {
                 if ($this->products_model->delete_product($product_id)) {
                     $this->session->set_flashdata('delete_message', 'Product deleted successfully');
-                    redirect(base_url('index.php/admin/dashboard'));
+                    redirect(base_url('index.php/admin/adminproductsview'));
                 } else {
                     $this->session->set_flashdata('delete_message', 'Product not deleted from database');
-                    redirect(base_url('index.php/admin/dashboard'));
+                    redirect(base_url('index.php/admin/adminproductsview'));
                 }
             }
         }
         else {
             redirect(base_url('/index.php/admin'));
         }
+    }
+
+    public function adminproductsview(){
+        $data['title'] = "Rahul Textiles";
+
+        $this->load->view('header',$data);
+        $this->load->view('sidenavbar');
+        if($this->session->has_userdata('adminusername')){
+            try {
+                $data['products'] = $this->products_model->get_all_products();
+
+                if (empty($data['products'])) {
+                    $data['emptydata'] = "No Products Found";
+                }
+                $this->load->view('adminproductsview', $data);
+            }
+            catch (Exception $e){
+                $data['heading'] = "Error in loading data";
+                $data['description'] = "Products retrival failed from database";
+                $this->load->view('empty_view',$data);
+            }
+        }
+        else {
+            redirect(base_url('index.php/admin/'));
+        }
+        $this->load->view('footer');
     }
 }

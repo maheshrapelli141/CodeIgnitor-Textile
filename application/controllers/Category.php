@@ -30,6 +30,28 @@ class Category extends CI_Controller {
     }
     public function index()
     {
+        $data['title'] = 'Rohit Textiles - Category';
+        if($this->session->has_userdata('adminusername')){
+            $this->load->view('header',$data);
+            $this->load->view('sidenavbar');
 
+            try {
+                $data['categories'] = $this->category_model->get_all_categories();
+                if (empty($data['categories'])) {
+                    $data['emptydata'] = 'No Categories were added yet';
+                }
+                $this->load->view('admincategories', $data);
+            }
+            catch (Exception $exception){
+                log_message($exception);
+                $data['heading'] = "Error in loading data";
+                $data['description'] = "Categories retrival failed from database";
+                $this->load->view('empty_view',$data);
+            }
+            $this->load->view('footer');
+        }
+        else {
+            redirect('index.php/admin/login');
+        }
     }
 }

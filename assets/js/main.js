@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+// preloader
+setTimeout(function () {
+    $('#loader-section').fadeOut();
+},1500);
+
 $('.edit-profile').click(function(){
     $('.dropdown-data').toggle();
 });
@@ -17,11 +23,12 @@ $('textarea').focusout(function(){
 $('.side-nav-btn').click(function () {
     $('.side-navbar').show();
     $('.container').css({'width':'70%','margin-left':'30%','margin-top':'80px'});
-    $('nav').css({'position':'fixed','top':'0','width':'100%'});
+    $('.navbar').css({'position':'fixed','top':'0','width':'100%'});
 });
 $('.side-nav-times').click(function () {
     $('.side-navbar').hide();
     $('.container').css({'width':'100%','margin-left':'auto','margin-top':'0px'});
-    $('nav').css({'position':'relative'});
+    $('.navbar').css({'position':'relative'});
 });
+
 });

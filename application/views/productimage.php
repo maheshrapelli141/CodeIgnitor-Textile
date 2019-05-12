@@ -36,6 +36,7 @@
             <input type="text" name="product_id" value="<?php echo $product['product_id']; ?>" style="visibility: hidden;"><br>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
+        <a href="<?php echo  base_url('index.php/admin/dashboard')?>" class="btn btn-default" style="float:right;">Done</a>
     </div>
     </div>
 </div>
