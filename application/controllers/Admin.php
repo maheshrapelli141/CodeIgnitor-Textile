@@ -48,6 +48,7 @@ class Admin extends CI_Controller {
     $this->form_validation->set_rules('password','Password',array('required','min_length[8]'));
 
     $this->load->view('header',$data);
+      $this->load->view('sidenavbar');
     if ($this->form_validation->run() === FALSE)
     {
             $this->load->view('adminlogin');
@@ -71,6 +72,7 @@ class Admin extends CI_Controller {
       $data['title'] = "Rahul Textiles";
 
       $this->load->view('header',$data);
+      $this->load->view('sidenavbar');
        if($this->session->has_userdata('adminusername')){
            try {
                $data['products'] = $this->products_model->get_all_products();
@@ -101,6 +103,7 @@ class Admin extends CI_Controller {
       $data['title'] = "Rahul Textiles";
 
       $this->load->view('header',$data);
+      $this->load->view('sidenavbar');
       if($this->session->has_userdata('adminusername')) {
           try {
               if($this->input->post('username')!="" OR $this->input->post('username')!=NULL){
@@ -146,6 +149,7 @@ class Admin extends CI_Controller {
         $data['title'] = "Rahul Textiles";
 
         $this->load->view('header',$data);
+        $this->load->view('sidenavbar');
         if($this->session->has_userdata('adminusername')) {
             try {
                 if($this->input->post('password')!="" OR $this->input->post('password')!=NULL){

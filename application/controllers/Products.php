@@ -329,7 +329,6 @@ class Products extends CI_Controller {
 
                 $product_id = $this->input->post('product_id');
 
-
                 $config['upload_path'] = './uploads/';
                 $config['allowed_types'] = 'jpeg|jpg|png';
 
