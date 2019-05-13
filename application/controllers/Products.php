@@ -104,11 +104,19 @@ class Products extends CI_Controller {
 
             $this->form_validation->set_rules('name', 'Name', array('required'));
             $this->form_validation->set_rules('description', 'Description', array('required'));
-            $this->form_validation->set_rules('price', 'Price', array('required'));
+
 
             $name = $this->input->post('name');
             $description = $this->input->post('description');
-            $price = $this->input->post('price');
+            $bag_size = $this->input->post('bagsize');
+            $bag_strap = $this->input->post('bagstrap');
+            $bag_shape = $this->input->post('bagshape');
+            $weight_capacity = $this->input->post('weightcapacity');
+            $strength = $this->input->post('strength');
+            $bag_color = $this->input->post('bagcolor');
+            $wash = $this->input->post('wash');
+            $inner_stitches = $this->input->post('innerstitches');
+            $printing_bags = $this->input->post('printingbags');
             $product_id = substr($name, 0, 3) . '-' . date('His') . '-' . date('dMY');
 
             $this->load->view('header', $data);
@@ -117,7 +125,7 @@ class Products extends CI_Controller {
             if ($this->form_validation->run() === FALSE) {
                 $this->load->view('addproduct');
             } else {
-                if ($this->products_model->add_product($product_id, $name, $description, $price)) {
+                if ($this->products_model->add_product($product_id,$name,$description,$bag_size,$bag_strap,$bag_shape,$weight_capacity,$strength,$bag_color,$wash,$inner_stitches,$printing_bags)) {
                     $flag = "success";
                 } else {
                     $flag = "Failed to add data in database";
@@ -148,12 +156,15 @@ class Products extends CI_Controller {
                 if ($imageCount < 1) {
                     $data['error'] = "The Image field is required";
                 } else {
-                    if ($imageCount > 2) {
-                        $data['error'] = "Maximum 2 images can upload";
+                    if ($imageCount > 5) {
+                        $data['error'] = "Maximum 5 images can upload";
                     } else {
                         $imageNames = array();
                         $imageNames[0] = "";
                         $imageNames[1] = "";
+                        $imageNames[2] = "";
+                        $imageNames[3] = "";
+                        $imageNames[4] = "";
                         for ($i = 0; $i < $imageCount; $i++) {
                             $config['upload_path'] = './uploads/';
                             $config['allowed_types'] = 'jpeg|jpg|png';
@@ -181,7 +192,7 @@ class Products extends CI_Controller {
                                 $imageNames[$i] = $imageName;
                             }
                         }
-                        if ($this->products_model->update_product_image($imageNames[0], $imageNames[1], $product_id)) {
+                        if ($this->products_model->update_product_image($imageNames[0], $imageNames[1], $imageNames[2], $imageNames[3], $imageNames[4], $product_id)) {
                             redirect(base_url('index.php/products/addimage/' . $product_id));
                         } else {
                             var_dump($imageNames[0] . " - " . $imageNames[1]);
@@ -221,12 +232,15 @@ class Products extends CI_Controller {
                 if ($imageCount < 1) {
                     $data['error'] = "The Image field is required";
                 } else {
-                    if ($imageCount > 2) {
-                        $data['error'] = "Maximum 2 images can upload";
+                    if ($imageCount > 5) {
+                        $data['error'] = "Maximum 5 images can upload";
                     } else {
                         $imageNames = array();
                         $imageNames[0] = "";
                         $imageNames[1] = "";
+                        $imageNames[2] = "";
+                        $imageNames[3] = "";
+                        $imageNames[4] = "";
                         for ($i = 0; $i < $imageCount; $i++) {
                             $config['upload_path'] = './uploads/';
                             $config['allowed_types'] = 'jpeg|jpg|png';
@@ -254,7 +268,7 @@ class Products extends CI_Controller {
                                 $imageNames[$i] = $imageName;
                             }
                         }
-                        if ($this->products_model->update_product_image($imageNames[0], $imageNames[1], $product_id)) {
+                        if ($this->products_model->update_product_image($imageNames[0], $imageNames[1], $imageNames[2], $imageNames[3], $imageNames[4], $product_id)) {
                             $this->session->set_flashdata('product_image_message', 'Images updates successfully');
                             redirect(base_url('index.php/products/updateimage/' . $product_id));
                         } else {
@@ -368,6 +382,175 @@ class Products extends CI_Controller {
         }
     }
 
+    public function updatethirdimage()
+    {
+        if($this->session->has_userdata('adminusername')) {
+            if ($this->input->post('product_id') != NULL) {
+
+                $product_id = $this->input->post('product_id');
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+
+
+                $_FILES['file']['name'] = $_FILES['userfile']['name'];
+                $_FILES['file']['type'] = $_FILES['userfile']['type'];
+                $_FILES['file']['tmp_name'] = $_FILES['userfile']['tmp_name'];
+                $_FILES['file']['error'] = $_FILES['userfile']['error'];
+                $_FILES['file']['size'] = $_FILES['userfile']['size'];
+
+                $imageName = time() . $_FILES['file']['name'];
+                $config['file_name'] = $imageName;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('file')) {
+                    $data['error'] = $this->upload->display_errors();
+                } else {
+                    $imageData = $this->upload->data();
+                    $imageName = $imageData['orig_name'];
+                }
+            }
+            if ($this->products_model->update_third_image($product_id, $imageName)) {
+                $this->session->set_flashdata('product_image_message', 'Image updated successfully');
+                redirect(base_url('index.php/products/updateimage/' . $product_id));
+            } else {
+                $data['error'] = 'Failed to update database';
+            }
+        }
+        else {
+            redirect(base_url('/index.php/admin'));
+        }
+    }
+
+    public function updatefourthimage()
+    {
+        if($this->session->has_userdata('adminusername')) {
+            if ($this->input->post('product_id') != NULL) {
+
+                $product_id = $this->input->post('product_id');
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+
+
+                $_FILES['file']['name'] = $_FILES['userfile']['name'];
+                $_FILES['file']['type'] = $_FILES['userfile']['type'];
+                $_FILES['file']['tmp_name'] = $_FILES['userfile']['tmp_name'];
+                $_FILES['file']['error'] = $_FILES['userfile']['error'];
+                $_FILES['file']['size'] = $_FILES['userfile']['size'];
+
+                $imageName = time() . $_FILES['file']['name'];
+                $config['file_name'] = $imageName;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('file')) {
+                    $data['error'] = $this->upload->display_errors();
+                } else {
+                    $imageData = $this->upload->data();
+                    $imageName = $imageData['orig_name'];
+                }
+            }
+            if ($this->products_model->update_fourth_image($product_id, $imageName)) {
+                $this->session->set_flashdata('product_image_message', 'Image updated successfully');
+                redirect(base_url('index.php/products/updateimage/' . $product_id));
+            } else {
+                $data['error'] = 'Failed to update database';
+            }
+        }
+        else {
+            redirect(base_url('/index.php/admin'));
+        }
+    }
+
+    public function updatefifthimage()
+    {
+        if($this->session->has_userdata('adminusername')) {
+            if ($this->input->post('product_id') != NULL) {
+
+                $product_id = $this->input->post('product_id');
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+
+
+                $_FILES['file']['name'] = $_FILES['userfile']['name'];
+                $_FILES['file']['type'] = $_FILES['userfile']['type'];
+                $_FILES['file']['tmp_name'] = $_FILES['userfile']['tmp_name'];
+                $_FILES['file']['error'] = $_FILES['userfile']['error'];
+                $_FILES['file']['size'] = $_FILES['userfile']['size'];
+
+                $imageName = time() . $_FILES['file']['name'];
+                $config['file_name'] = $imageName;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('file')) {
+                    $data['error'] = $this->upload->display_errors();
+                } else {
+                    $imageData = $this->upload->data();
+                    $imageName = $imageData['orig_name'];
+                }
+            }
+            if ($this->products_model->update_fifth_image($product_id, $imageName)) {
+                $this->session->set_flashdata('product_image_message', 'Image updated successfully');
+                redirect(base_url('index.php/products/updateimage/' . $product_id));
+            } else {
+                $data['error'] = 'Failed to update database';
+            }
+        }
+        else {
+            redirect(base_url('/index.php/admin'));
+        }
+    }
+
+    public function updateImageByPosition(){
+        if($this->session->has_userdata('adminusername')) {
+            if ($this->input->post('product_id') != NULL) {
+
+                $product_id = $this->input->post('product_id');
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+
+
+
+                $imageName = time() . $_FILES['userfile']['name'];
+                $config['file_name'] = $imageName;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $data['error'] = $this->upload->display_errors();
+                } else {
+                    $imageData = $this->upload->data();
+                    $imageName = $imageData['orig_name'];
+                }
+            }
+            $flag = 0;
+            if($this->input->post('imageposition')==1){ $this->products_model->update_first_image($product_id, $imageName); $flag=1; }
+            if($this->input->post('imageposition')==2){ $this->products_model->update_second_image($product_id, $imageName); $flag=1; }
+            if($this->input->post('imageposition')==3){ $this->products_model->update_third_image($product_id, $imageName); $flag=1; }
+            if($this->input->post('imageposition')==4){ $this->products_model->update_fourth_image($product_id, $imageName); $flag=1; }
+            if($this->input->post('imageposition')==5){ $this->products_model->update_fifth_image($product_id, $imageName); $flag=1; }
+
+            if ($flag) {
+                $this->session->set_flashdata('product_image_message', 'Image updated successfully');
+                redirect(base_url('index.php/products/updateimage/' . $product_id));
+            } else {
+                $data['error'] = 'Failed to update database';
+            }
+        }
+        else {
+            redirect(base_url('/index.php/admin'));
+        }
+    }
+
     public function updateproduct($product_id = NULL){
 	    if($this->session->has_userdata('adminusername')) {
             $data['title'] = 'Update Product';
@@ -377,9 +560,18 @@ class Products extends CI_Controller {
 
                 $product_id = $this->input->post('product_id');
                 $name = $this->input->post('name');
-                $price = $this->input->post('price');
                 $description = $this->input->post('description');
-                if($this->products_model->update_product_details($product_id,$name,$price,$description)){
+                $bag_size = $this->input->post('bagsize');
+                $bag_strap = $this->input->post('bagstrap');
+                $bag_shape = $this->input->post('bagshape');
+                $weight_capacity = $this->input->post('weightcapacity');
+                $strength = $this->input->post('strength');
+                $bag_color = $this->input->post('bagcolor');
+                $wash = $this->input->post('wash');
+                $inner_stitches = $this->input->post('innerstitches');
+                $printing_bags = $this->input->post('printingbags');
+
+                if($this->products_model->update_product_details($product_id,$name,$description,$bag_size,$bag_strap,$bag_shape,$weight_capacity,$strength,$bag_color,$wash,$inner_stitches,$printing_bags)){
                     $this->session->set_flashdata('product_details_message','Updation success');
                     redirect(base_url('index.php/products/updateproduct/'.$product_id));
                 }
@@ -403,14 +595,14 @@ class Products extends CI_Controller {
         if($this->session->has_userdata('adminusername')) {
             if ($product_id === NULL) {
                 $this->session->set_flashdata('delete_message', 'Invalid Product details');
-                redirect(base_url('index.php/admin/adminproductsview'));
+                redirect(base_url('index.php/admin/dashboard'));
             } else {
                 if ($this->products_model->delete_product($product_id)) {
                     $this->session->set_flashdata('delete_message', 'Product deleted successfully');
-                    redirect(base_url('index.php/admin/adminproductsview'));
+                    redirect(base_url('index.php/admin/dashboard'));
                 } else {
                     $this->session->set_flashdata('delete_message', 'Product not deleted from database');
-                    redirect(base_url('index.php/admin/adminproductsview'));
+                    redirect(base_url('index.php/admin/dashboard'));
                 }
             }
         }
@@ -431,7 +623,7 @@ class Products extends CI_Controller {
                 if (empty($data['products'])) {
                     $data['emptydata'] = "No Products Found";
                 }
-                $this->load->view('adminproductsview', $data);
+                $this->load->view('admindashboard', $data);
             }
             catch (Exception $e){
                 $data['heading'] = "Error in loading data";

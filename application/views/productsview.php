@@ -9,7 +9,7 @@
         <div class="card-inner">
             <img src="<?php echo base_url($product['image']); ?>" class="product-image">
             <h4 class="product-name"><?php echo $product['name']; ?></h4>
-            <p><strong><i class="fas fa-rupee-sign"></i> <?php echo $product['price']; ?></strong></p>
+            <p><strong><!--<i class="fas fa-rupee-sign"></i>-->Size : <?php echo $product['bag_size']; ?></strong></p>
         </div>
         </a>
     </div>

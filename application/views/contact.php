@@ -26,11 +26,11 @@
 
 <div class="wrapper" style="background-color: #eeeeee;text-align: center;">
     <div>
-    <h1>Contact</h1>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?php echo base_url('index.php/')?>">Home</a></li>
-        <li class="breadcrumb-item">Contact</li>
-    </ol>
+        <h1>Contact</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?php echo base_url('index.php/')?>">Home</a></li>
+            <li class="breadcrumb-item">Contact</li>
+        </ol>
     </div>
 </div>
 <div class="container"><br><br>
@@ -50,10 +50,15 @@
         </div>
         <div class="col-sm-5">
             <div class="contact-details">
-                <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 24px"></i><p> A/2 , Gala No 1, Jayaraj Comp, Opp Pragati Quarry,Kharbaw Road,Kalwar, Bhiwandi,Thane, Maharashtra.</p><br>
-                <i class="fa fa-envelope" aria-hidden="true" style="font-size: 24px"></i><p> chaganpatil@hotmail.com <br> dharmendrashah1909@gmail.com</p><br>
-                <img src="<?php echo base_url('./assets/img/whatsapp.svg')?>" height="24px" width="24px"><p> Whatsapp :  7045368999</p><br>
-                <i class="fa fa-phone" aria-hidden="true"></i><p> Customer Service : 8104092178</p><br>
+                <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 24px"></i><p> H.No. 1249, R.C. Buld., Bhandari Compound, Bhandari Chowk, Narpoli,
+                    Bhiwandi – 421 302, Dist : Thane, Maharashtra, India.</p><br>
+                <i class="fa fa-envelope" aria-hidden="true" style="font-size: 24px"></i><p> chaganpatil@hotmail.com <br> dharmendrashah1909@gmail.com. <br> rohitkhatkepatil@gmail.com
+                    <br>info@rohittextiles.com
+                    <br>dharmendrashah@rohittextiles.com
+                    <br>rohitpatil@rohittextiles.com
+                    <br>customercare@rohittextiles.com</p><br>
+                <img src="<?php echo base_url('./assets/img/whatsapp.svg')?>" height="24px" width="24px"><p> Whatsapp :  7045368999 / 9028300887</p><br>
+                <i class="fa fa-phone" aria-hidden="true"></i><p> Customer Service : 8104092178 / 9028300887</p><br>
                 <i class="fa fa-address-book" aria-hidden="true"></i><p> Office : 02522 278457</p><br>
             </div>
         </div>

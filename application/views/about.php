@@ -74,8 +74,8 @@
 
     <h2>Our Mission</h2><hr>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“To Emerge as the Leading Bag Manufacturer in the country with the aim of protecting the Environment
-        by making High Quality Cotton Carry Bags at great prices.”
-        Corporate Social Responsibilities
+        by making High Quality Cotton Carry Bags at great prices.”<br>
+        Corporate Social Responsibilities<br>
         Rohit Textiles would be providing Employment to Women Entrepreneur’s by providing machinery and
         training in making carry bags at their houses.
         <br>
