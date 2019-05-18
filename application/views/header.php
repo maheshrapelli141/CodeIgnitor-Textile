@@ -30,13 +30,13 @@
         <a class="nav-link" href="<?php echo base_url('/'); ?>">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('/index.php/products'); ?>">Products</a>
+        <a class="nav-link" href="<?php echo base_url('/products'); ?>">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('/index.php/about'); ?>">About</a>
+        <a class="nav-link" href="<?php echo base_url('/about'); ?>">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('/index.php/contact'); ?>">Contact</a>
+        <a class="nav-link" href="<?php echo base_url('/contact'); ?>">Contact</a>
       </li>
     </ul>
 <!--      --><?php //if(isset($_SESSION['adminusername'])){ ?>

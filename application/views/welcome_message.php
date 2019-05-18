@@ -5,17 +5,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="slideshow-container">
 
         <div class="mySlides fade">
-            <img src="./assets/img/slide1.jpg" style="width:100%;height:350px;" class="slider-img">
+            <img src="./assets/img/slide1.jpg" style="width:100%;height:400px;" class="slider-img">
             <!--<div class="text">Caption Text</div>-->
         </div>
 
         <div class="mySlides fade">
-            <img src="./assets/img/slide2.jpeg" style="width:100%;height:350px;" class="slider-img">
+            <img src="./assets/img/slide2.jpeg" style="width:100%;height:400px;" class="slider-img">
             <!--<div class="text">Caption Two</div>-->
         </div>
 
         <div class="mySlides fade">
-            <img src="./assets/img/slide3.jpg" style="width:100%;height:350px;" class="slider-img">
+            <img src="./assets/img/slide3.jpg" style="width:100%;height:400px;" class="slider-img">
             <!--<div class="text">Caption Three</div>-->
         </div>
 
@@ -27,7 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="dot"></span>
     </div>
 </div>
-<div class="container">
+<div class="container" style="min-height:auto;">
+    <br><br><br>
     <div class="row">
         <div class="col-sm-8 cell-padding">
             <h2 align="center">Rohit Textile</h2>

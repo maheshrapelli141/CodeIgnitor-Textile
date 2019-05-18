@@ -90,7 +90,7 @@
 
     for(var i=0;i<images.length;i++){
         var imageElement = document.getElementById("image"+(i+1));
-        if(images[i].includes("./assets/img/no_image_available.png") || images[i]=="http://localhost/CodeIgnitor-Textile/"){
+        if(images[i].includes("./assets/img/no_image_available.png") || images[i]=="http://rohittextiles.com/"){
             images[i] = '#';
             imageElement.style.display = 'none';
         }
