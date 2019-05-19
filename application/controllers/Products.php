@@ -84,59 +84,63 @@ class Products extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function addproduct(){
-        $data['title'] = "Rahul Textiles - Add Product";
-
-        $this->load->view('header',$data);
-        if($this->session->has_userdata('adminusername')){
-            $this->load->view('sidenavbar');
-            $this->load->view('addproduct');
-        }
-        else {
-            redirect(base_url('/index.php/admin'));
-        }
-        $this->load->view('footer');
-    }
+//    public function addproduct(){
+//        $data['title'] = "Rahul Textiles - Add Product";
+//
+//        $this->load->view('header',$data);
+//        if($this->session->has_userdata('adminusername')){
+//            $this->load->view('sidenavbar');
+//        }
+//        else {
+//            redirect(base_url('/index.php/admin'));
+//        }
+//        $this->load->view('footer');
+//    }
 
     public function add(){
         if($this->session->has_userdata('adminusername')) {
-            $data['title'] = "Rahul Textiles - Products";
+            $data['title'] = "Rahul Textiles - Add Product";
 
-            $this->form_validation->set_rules('name', 'Name', array('required'));
-            $this->form_validation->set_rules('description', 'Description', array('required'));
-
-
-            $name = $this->input->post('name');
-            $description = $this->input->post('description');
-            $bag_size = $this->input->post('bagsize');
-            $bag_strap = $this->input->post('bagstrap');
-            $bag_shape = $this->input->post('bagshape');
-            $weight_capacity = $this->input->post('weightcapacity');
-            $strength = $this->input->post('strength');
-            $bag_color = $this->input->post('bagcolor');
-            $wash = $this->input->post('wash');
-            $inner_stitches = $this->input->post('innerstitches');
-            $printing_bags = $this->input->post('printingbags');
-            $product_id = substr($name, 0, 3) . '-' . date('His') . '-' . date('dMY');
 
             $this->load->view('header', $data);
             $this->load->view('sidenavbar');
-            $flag = "";
-            if ($this->form_validation->run() === FALSE) {
-                $this->load->view('addproduct');
-            } else {
-                if ($this->products_model->add_product($product_id,$name,$description,$bag_size,$bag_strap,$bag_shape,$weight_capacity,$strength,$bag_color,$wash,$inner_stitches,$printing_bags)) {
-                    $flag = "success";
+            if($this->input->post('name')!=NULL){
+                $this->form_validation->set_rules('name', 'Name', array('required'));
+                $this->form_validation->set_rules('description', 'Description', array('required'));
+
+
+                $name = $this->input->post('name');
+                $description = $this->input->post('description');
+                $bag_size = $this->input->post('bagsize');
+                $bag_strap = $this->input->post('bagstrap');
+                $bag_shape = $this->input->post('bagshape');
+                $weight_capacity = $this->input->post('weightcapacity');
+                $strength = $this->input->post('strength');
+                $bag_color = $this->input->post('bagcolor');
+                $wash = $this->input->post('wash');
+                $inner_stitches = $this->input->post('innerstitches');
+                $printing_bags = $this->input->post('printingbags');
+                $product_id = substr($name, 0, 3) . '-' . date('His') . '-' . date('dMY');
+
+                $flag = "";
+                if ($this->form_validation->run() === FALSE) {
+                    $this->load->view('addproduct');
                 } else {
-                    $flag = "Failed to add data in database";
+                    if ($this->products_model->add_product($product_id,$name,$description,$bag_size,$bag_strap,$bag_shape,$weight_capacity,$strength,$bag_color,$wash,$inner_stitches,$printing_bags)) {
+                        $flag = "success";
+                        $this->load->view('addproduct', $flag);
+                        $uri = "/index.php/products/addimage/" . $product_id;
+                        redirect($uri);
+                    } else {
+                        $flag = "Failed to add data in database";
+                        $this->load->view('addproduct', $flag);
+                    }
                 }
             }
-            if ($flag == "success") {
-                $uri = "/index.php/products/addimage/" . $product_id;
-                redirect($uri);
-            } else {
-                $this->load->view('addproduct', $flag);
+            else {
+                $this->load->view('addproduct');
             }
+
             $this->load->view('footer');
         }
         else {

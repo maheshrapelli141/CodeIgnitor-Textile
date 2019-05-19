@@ -1,4 +1,4 @@
-<div class="container form-container"><br>
+<div class="container form-container" style="height: 600px;"><br>
     <h2>Change Password </h2><hr>
     <div class="form-box" style="top: 55%;">
 

@@ -1,3 +1,7 @@
+body{
+  width: 100%;
+  overflow-x: hidden;
+}
 .navbar{
   z-index: 999;
 }
@@ -32,17 +36,18 @@
   }
 }
 .footer {
-  margin-top: 50px;
+  /*margin-top: 50px;*/
   height: 50px;
   width: 100%;
   padding: 16px;
-  text-align: center;
+  /*text-align: center;*/
   color: #ffffff;
   background-color: #222 !important;
 }
 
 .container{
   position: relative;
+  /*min-height: 500px;*/
 }
 .side-navbar{
   position: fixed;
@@ -107,6 +112,13 @@
   background: #fff;
 }
 
+@media only screen and (max-width: 640px) {
+  #loader {
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%,-50%);
+  }
+}
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -124,9 +136,6 @@
 .mySlides {display: none;}
 .slider-img {vertical-align: middle;}
 
-.container {
-  min-height: 500px;
-}
 /* Slideshow container */
 .slideshow-container {
   max-width: 100%;
@@ -176,7 +185,67 @@
   animation-name: fade;
   animation-duration: 5s;
 }
+.slider-img {
+  width:100%;
+  height:450px;
+}
+.about-section{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align: center;
+  position: relative;
+}
+.product-section{
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.product-section .btn-primary {
+  position: absolute;
+  top: 150px;
+  right: 0px;
+}
+.testimonials-section{
+  height: 400px;
+  width: 100%;
+  background-color: #222 !important;
+  color: #ffffff;
+}
+.testimonials-section .container {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  height: 100%;
+  overflow: hidden;
+}
+.show-testimonial {
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  display: none;
+  text-align: center;
+  animation-name: slideInLeft;
+  animation-duration: .5s;
+}
+.show-testimonial hr{
+  border-bottom: 1px solid #ffffff;
+}
 
+@media only screen and (max-width: 640px) {
+  .show-testimonial{
+    left: 33%;
+  }
+  .slider-img{
+    height: auto;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .slider-img{
+    height: auto;
+  }
+  .show-testimonial{
+    left: 27%;
+  }
+}
 .custom-container {
 	padding:0px;
 	margin:0px;
@@ -202,7 +271,12 @@
 	bottom:20px;
 	left : 48%;
 }
-
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .dots {
+    left: 42%;
+  }
+}
 .cell-padding {
   padding:18px;
 }

@@ -2,7 +2,7 @@
 ?><br>
 <div class="container">
     <h2>Dashboard : </h2><hr>
-    <a class="btn btn-primary" href="<?php echo base_url('index.php/products/addproduct')?>">Add</a><br><br>
+    <a class="btn btn-primary" href="<?php echo base_url('index.php/products/add')?>">Add</a><br><br>
     <?php
     if(isset($emptydata) && $emptydata!=""){
         echo '<h3>No products uploaded yet!</h3>';

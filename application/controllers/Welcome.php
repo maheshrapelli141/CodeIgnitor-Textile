@@ -18,12 +18,29 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-		
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('products_model');
+        $this->load->helper('url_helper');
+    }
+
 	public function index()
 	{
-		$data['title'] = "Rohit Textiles";
-		$this->load->view('header',$data);
-		$this->load->view('welcome_message');
+        $data['title'] = "Rohit Textiles";
+
+        $this->load->view('header', $data);
+	    try {
+            $data['products'] = $this->products_model->get_all_products();
+            if(empty($data['products'])){
+                $data['error'] = "Products not found";
+            }
+        }catch (Exception $exception){
+	        log_message($exception);
+	        $data['error'] = "Data retrival failed from database";
+        }
+        $this->load->view('welcome_message',$data);
 		$this->load->view('footer');
 	}
 

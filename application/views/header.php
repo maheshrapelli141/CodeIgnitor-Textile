@@ -6,6 +6,7 @@
     <title><?php echo $title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/animate.css'); ?>" >
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/style.css'); ?>" >
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/bootstrap.css'); ?>" >
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/fontawesome.css'); ?>" >
